@@ -56,6 +56,8 @@ Then select and open ```LINQInManhattan.sln```
 #### C# 7.0 in a Nutshell
 #### C# Pocket Reference
 #### C# and .NET Core Test-Driven Development
+#### https://www.newtonsoft.com/json
+#### https://github.com/codefellows/seattle-dotnet-401d7
 
 ------------------------------
 For more information on Markdown: https://www.markdownguide.org/cheat-sheet
