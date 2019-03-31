@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using LINQInManhattan.Classes;
+using System.Collections.Generic;
 
 namespace LINQInManhattan
 {
@@ -11,7 +13,7 @@ namespace LINQInManhattan
         static void Main(string[] args)
         {
             string path = "../../../../data.json";
-            FeatureCollection raw = GetJson(path);
+            List<PropertyType> raw = GetJson(path);
 
             bool menu = true;
             while (menu)
@@ -26,7 +28,7 @@ namespace LINQInManhattan
         /// </summary>
         /// <param name="raw"></param>
         /// <returns></returns>
-        static bool NavMenu(FeatureCollection raw)
+        static bool NavMenu(List<PropertyType> raw)
         {
             Console.Clear();
             Console.WriteLine("1) Print all Properties (unfiltered)");
@@ -40,6 +42,7 @@ namespace LINQInManhattan
             {
                 Console.Clear();
                 PrintAllRaw(raw);
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "2")
@@ -81,35 +84,41 @@ namespace LINQInManhattan
         /// </summary>
         /// <param name="path">source file for the data.Json file</param>
         /// <returns>Raw form of the deserialized FeatureCollection</returns>
-        static FeatureCollection GetJson(string path)
+        static List<PropertyType> GetJson(string path)
         {
             string data = File.ReadAllText(path);
-            FeatureCollection raw = JsonConvert.DeserializeObject<FeatureCollection>(data);
+            List<PropertyType> raw = GetRaw(data);
             return raw;
 
         }
 
-        static void PrintAllRaw(FeatureCollection raw)
+        private static List<PropertyType> GetRaw(string data)
+        {
+            return JsonConvert.DeserializeObject<List<PropertyType>>(data);
+        }
+
+        static void PrintAllRaw(List<PropertyType> raw)
+        {
+            var data = from feature in raw
+                       select feature.Properties.Neighborhood;
+        }
+
+        static void PrintKnownNeighborhoods(List<PropertyType> raw)
         {
 
         }
 
-        static void PrintKnownNeighborhoods(FeatureCollection raw)
+        static void PrintKnownNeighborhoodsAlt(List<PropertyType> raw)
         {
 
         }
 
-        static void PrintKnownNeighborhoodsAlt(FeatureCollection raw)
+        static void PrintAllNoDups(List<PropertyType> raw)
         {
 
         }
 
-        static void PrintAllNoDups(FeatureCollection raw)
-        {
-
-        }
-
-        static void PrintKnownNeighborhoodsNoDups(FeatureCollection raw)
+        static void PrintKnownNeighborhoodsNoDups(List<PropertyType> raw)
         {
 
         }

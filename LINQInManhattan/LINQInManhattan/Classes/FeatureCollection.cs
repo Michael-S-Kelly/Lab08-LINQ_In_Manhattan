@@ -11,5 +11,6 @@ namespace LINQInManhattan.Classes
     {
         public string Type { get; set; }
         public List<PropertyType> Features { get; set; }
+        
     }
 }
