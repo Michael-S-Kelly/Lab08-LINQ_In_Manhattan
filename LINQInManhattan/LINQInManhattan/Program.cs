@@ -45,12 +45,18 @@ namespace LINQInManhattan
         {
             string path = "../../../../data.json";
 
+
             string data = "";
 
             using (StreamReader sr = File.OpenText(path))
             {
                 data = sr.ReadToEnd();
             }
+        }
+
+        static void DesirializeJson()
+        {
+
         }
 
         //TODO: Bring the Json data into the program
