@@ -4,6 +4,9 @@ using System.Text;
 
 namespace LINQInManhattan.Classes
 {
+    /// <summary>
+    /// Collects the Properties data for PropertyTypes
+    /// </summary>
     public class Properties
     {
         public string Zip { get; set; }

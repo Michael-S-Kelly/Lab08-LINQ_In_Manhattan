@@ -2,7 +2,9 @@
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using LINQInManhattan.Classes;
+using System.Collections.Generic;
 
 namespace LINQInManhattan
 {
@@ -10,25 +12,64 @@ namespace LINQInManhattan
     {
         static void Main(string[] args)
         {
+            string path = "../../../../data.json";
+            List<PropertyType> raw = GetJson(path);
+
             bool menu = true;
             while (menu)
             {
-                menu = NavMenu();
+                menu = NavMenu(raw);
             }
              
         }
 
-        static bool NavMenu()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <returns></returns>
+        static bool NavMenu(List<PropertyType> raw)
         {
             Console.Clear();
-            Console.WriteLine("1) Run");
-            Console.WriteLine("2) Exit");
+            Console.WriteLine("1) Print all Properties (unfiltered)");
+            Console.WriteLine("2) Print all Properties (known neighborhoods)");
+            Console.WriteLine("3) Print all Properties (known neighborhoods (alternate search))");
+            Console.WriteLine("4) Print all Properties (duplicates removed)");
+            Console.WriteLine("5) Print all Properties (known neighborhood & duplicates removed)");
+            Console.WriteLine("6) Exit");
             string choice = Console.ReadLine();
             if (choice == "1")
             {
+                Console.Clear();
+                PrintAllRaw(raw);
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "2")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoods(raw);
+                return true;
+            }
+            else if (choice == "3")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoodsAlt(raw);
+                return true;
+            }
+            else if (choice == "4")
+            {
+                Console.Clear();
+                PrintAllNoDups(raw);
+                return true;
+            }
+            else if (choice == "5")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoodsNoDups(raw);
+                return true;
+            }
+            else if (choice == "6")
             {
                 return false;
             }
@@ -39,22 +80,45 @@ namespace LINQInManhattan
         }
 
         /// <summary>
-        /// Brings data in from Json
+        /// Brings data in from Json, Deserializes it, and gives it to the FeatureCollection
         /// </summary>
-        static void GetJson()
+        /// <param name="path">source file for the data.Json file</param>
+        /// <returns>Raw form of the deserialized FeatureCollection</returns>
+        static List<PropertyType> GetJson(string path)
         {
-            string path = "../../../../data.json";
+            string data = File.ReadAllText(path);
+            List<PropertyType> raw = GetRaw(data);
+            return raw;
 
-
-            string data = "";
-
-            using (StreamReader sr = File.OpenText(path))
-            {
-                data = sr.ReadToEnd();
-            }
         }
 
-        static void DesirializeJson()
+        private static List<PropertyType> GetRaw(string data)
+        {
+            return JsonConvert.DeserializeObject<List<PropertyType>>(data);
+        }
+
+        static void PrintAllRaw(List<PropertyType> raw)
+        {
+            var data = from feature in raw
+                       select feature.Properties.Neighborhood;
+        }
+
+        static void PrintKnownNeighborhoods(List<PropertyType> raw)
+        {
+
+        }
+
+        static void PrintKnownNeighborhoodsAlt(List<PropertyType> raw)
+        {
+
+        }
+
+        static void PrintAllNoDups(List<PropertyType> raw)
+        {
+
+        }
+
+        static void PrintKnownNeighborhoodsNoDups(List<PropertyType> raw)
         {
 
         }
