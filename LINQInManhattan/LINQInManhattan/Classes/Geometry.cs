@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LINQInManhattan.Classes
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     /// <summary>
     /// Collects the Geometry data for PropertyTypes
     /// </summary>
-    class Geometry
+    public class Geometry
     {
+        [JsonProperty(PropertyName = "Type")]
         public string Type { get; set; }
+        [JsonProperty(PropertyName = "Coordinates")]
         public List<double> Coordinates { get; set; }
     }
 }
