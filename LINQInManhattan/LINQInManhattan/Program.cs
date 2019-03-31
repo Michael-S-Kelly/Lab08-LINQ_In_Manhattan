@@ -10,25 +10,63 @@ namespace LINQInManhattan
     {
         static void Main(string[] args)
         {
+            string path = "../../../../data.json";
+            FeatureCollection raw = GetJson(path);
+
             bool menu = true;
             while (menu)
             {
-                menu = NavMenu();
+                menu = NavMenu(raw);
             }
              
         }
 
-        static bool NavMenu()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <returns></returns>
+        static bool NavMenu(FeatureCollection raw)
         {
             Console.Clear();
-            Console.WriteLine("1) Run");
-            Console.WriteLine("2) Exit");
+            Console.WriteLine("1) Print all Properties (unfiltered)");
+            Console.WriteLine("2) Print all Properties (known neighborhoods)");
+            Console.WriteLine("3) Print all Properties (known neighborhoods (alternate search))");
+            Console.WriteLine("4) Print all Properties (duplicates removed)");
+            Console.WriteLine("5) Print all Properties (known neighborhood & duplicates removed)");
+            Console.WriteLine("6) Exit");
             string choice = Console.ReadLine();
             if (choice == "1")
             {
+                Console.Clear();
+                PrintAllRaw(raw);
                 return true;
             }
             else if (choice == "2")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoods(raw);
+                return true;
+            }
+            else if (choice == "3")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoodsAlt(raw);
+                return true;
+            }
+            else if (choice == "4")
+            {
+                Console.Clear();
+                PrintAllNoDups(raw);
+                return true;
+            }
+            else if (choice == "5")
+            {
+                Console.Clear();
+                PrintKnownNeighborhoodsNoDups(raw);
+                return true;
+            }
+            else if (choice == "6")
             {
                 return false;
             }
@@ -39,22 +77,39 @@ namespace LINQInManhattan
         }
 
         /// <summary>
-        /// Brings data in from Json
+        /// Brings data in from Json, Deserializes it, and gives it to the FeatureCollection
         /// </summary>
-        static void GetJson()
+        /// <param name="path">source file for the data.Json file</param>
+        /// <returns>Raw form of the deserialized FeatureCollection</returns>
+        static FeatureCollection GetJson(string path)
         {
-            string path = "../../../../data.json";
+            string data = File.ReadAllText(path);
+            FeatureCollection raw = JsonConvert.DeserializeObject<FeatureCollection>(data);
+            return raw;
 
-
-            string data = "";
-
-            using (StreamReader sr = File.OpenText(path))
-            {
-                data = sr.ReadToEnd();
-            }
         }
 
-        static void DesirializeJson()
+        static void PrintAllRaw(FeatureCollection raw)
+        {
+
+        }
+
+        static void PrintKnownNeighborhoods(FeatureCollection raw)
+        {
+
+        }
+
+        static void PrintKnownNeighborhoodsAlt(FeatureCollection raw)
+        {
+
+        }
+
+        static void PrintAllNoDups(FeatureCollection raw)
+        {
+
+        }
+
+        static void PrintKnownNeighborhoodsNoDups(FeatureCollection raw)
         {
 
         }
