@@ -57,10 +57,8 @@ Then select and open ```LINQInManhattan.sln```
 #### Microsoft Visual C# Step by Step Ninth Edition
 #### C# 7.0 in a Nutshell
 #### C# Pocket Reference
-#### C# and .NET Core Test-Driven Development
 #### https://www.newtonsoft.com/json
 #### https://github.com/codefellows/seattle-dotnet-401d7
 #### https://stackoverflow.com/questions/37894177/deserializing-json-object-throws-a-newtonsoft-json-jsonserializationexception
-
 ------------------------------
 For more information on Markdown: https://www.markdownguide.org/cheat-sheet

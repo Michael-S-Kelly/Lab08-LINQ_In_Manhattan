@@ -13,16 +13,7 @@ namespace LINQInManhattan
         static void Main(string[] args)
         {
             string path = "../../../../data.json";
-            var data = "";
-            
-
-            using (StreamReader sr = File.OpenText(path))
-            {
-                data = sr.ReadToEnd();
-            }
-
-            var raw = JsonConvert.DeserializeObject<List<FeatureCollection>>(data);
-
+            FeatureCollection raw = GetJson(path);
 
             bool menu = true;
             while (menu)
@@ -33,11 +24,11 @@ namespace LINQInManhattan
         }
 
         /// <summary>
-        /// 
+        /// Navigates between the different query printouts and exit program
         /// </summary>
-        /// <param name="raw"></param>
+        /// <param name="raw">Deserialized Json data</param>
         /// <returns></returns>
-        static bool NavMenu(List<FeatureCollection> raw)
+        static bool NavMenu(FeatureCollection raw)
         {
             Console.Clear();
             Console.WriteLine("1) Print all Properties (unfiltered)");
@@ -51,6 +42,8 @@ namespace LINQInManhattan
             {
                 Console.Clear();
                 PrintAllRaw(raw);
+                Console.WriteLine("===========================================================");
+                Console.WriteLine("Please press any key to continue.");
                 Console.ReadKey();
                 return true;
             }
@@ -88,50 +81,55 @@ namespace LINQInManhattan
             }
         }
 
-        /*
+        
         /// <summary>
         /// Brings data in from Json, Deserializes it, and gives it to the FeatureCollection
         /// </summary>
         /// <param name="path">source file for the data.Json file</param>
         /// <returns>Raw form of the deserialized FeatureCollection</returns>
-        static var GetJson(string path)
+        static FeatureCollection GetJson(string path)
         {
-            var data = File.ReadAllText(path);
-            var raw = JsonConvert.DeserializeObject<List<FeatureCollection>>(data);
-            return raw;
-
+            using (StreamReader sr = File.OpenText(path))
+            {
+                var data = "";
+                data = sr.ReadToEnd();
+                FeatureCollection raw = JsonConvert.DeserializeObject<FeatureCollection>(data);
+                return raw;
+            }
         }
-        */
-
-        /*
-        private static List<RetrieveMultipleResponse> GetRaw(string data)
-        {
-            return JsonConvert.DeserializeObject<List<RetrieveMultipleResponse>>(data);
-        }
-        */
+        
         #region Query methods to execute for options 1 through 5 of NavMenu method
-        static void PrintAllRaw(List<FeatureCollection> raw)
+        /// <summary>
+        /// Grabs the deserialized data from the Json file and prints out all the properties
+        /// </summary>
+        /// <param name="raw">Deserialized data from the Json file</param>
+        static void PrintAllRaw(FeatureCollection raw)
         {
-            var data = from feature in raw
-                       select feature.Features;
+            var data = from feature in raw.Features
+                       select raw.Features;
+
+            foreach (var property in data)
+            {
+                Console.WriteLine(property);
+            }
         }
 
-        static void PrintKnownNeighborhoods(List<FeatureCollection> raw)
+        static void PrintKnownNeighborhoods(FeatureCollection raw)
         {
 
         }
 
-        static void PrintKnownNeighborhoodsAlt(List<FeatureCollection> raw)
+        static void PrintKnownNeighborhoodsAlt(FeatureCollection raw)
         {
 
         }
 
-        static void PrintAllNoDups(List<FeatureCollection> raw)
+        static void PrintAllNoDups(FeatureCollection raw)
         {
 
         }
 
-        static void PrintKnownNeighborhoodsNoDups(List<FeatureCollection> raw)
+        static void PrintKnownNeighborhoodsNoDups(FeatureCollection raw)
         {
 
         }

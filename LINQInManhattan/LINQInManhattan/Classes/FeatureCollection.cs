@@ -11,10 +11,10 @@ namespace LINQInManhattan.Classes
     /// </summary>
     public class FeatureCollection
     {
-        [JsonProperty(PropertyName = "Type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
-        [JsonProperty(PropertyName = "Features")]
-        public List<PropertyType> Features { get; set; }
+        [JsonProperty(PropertyName = "features")]
+        public PropertyType[] Features { get; set; }
         
     }
 }

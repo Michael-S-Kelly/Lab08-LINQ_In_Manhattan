@@ -11,9 +11,9 @@ namespace LINQInManhattan.Classes
     /// </summary>
     public class Geometry
     {
-        [JsonProperty(PropertyName = "Type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
-        [JsonProperty(PropertyName = "Coordinates")]
+        [JsonProperty(PropertyName = "coordinates")]
         public List<double> Coordinates { get; set; }
     }
 }
