@@ -33,8 +33,16 @@ Then select and open ```LINQInManhattan.sln```
 
 ##### Application Start
 ![Image 1](Assets/NavMenu.PNG)
-
-
+##### Print all Neighborhoods
+![Image 1](Assets/Neighborhood1.PNG)
+##### Print all Neighborhoods blanks removed
+![Image 1](Assets/Neighborhood2.PNG)
+##### Print all Neighborhoods blanks removed Alt
+![Image 1](Assets/Neighborhood3.PNG)
+##### Print all Neighborhoods duplicates removed
+![Image 1](Assets/Neighborhood4.PNG)
+##### Print all Neighborhoods duplicates and blanks removed
+![Image 1](Assets/Neighborhood5.PNG)
 ------------------------------
 
 ## Change Log
