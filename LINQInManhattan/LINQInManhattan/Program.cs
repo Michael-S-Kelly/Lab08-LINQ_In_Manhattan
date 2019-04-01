@@ -14,8 +14,8 @@ namespace LINQInManhattan
         {
             string path = "../../../../data.json";
             FeatureCollection raw = GetJson(path);
-
             bool menu = true;
+
             while (menu)
             {
                 menu = NavMenu(raw);
@@ -51,24 +51,36 @@ namespace LINQInManhattan
             {
                 Console.Clear();
                 PrintKnownNeighborhoods(raw);
+                Console.WriteLine("===========================================================");
+                Console.WriteLine("Please press any key to continue.");
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "3")
             {
                 Console.Clear();
                 PrintKnownNeighborhoodsAlt(raw);
+                Console.WriteLine("===========================================================");
+                Console.WriteLine("Please press any key to continue.");
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "4")
             {
                 Console.Clear();
                 PrintAllNoDups(raw);
+                Console.WriteLine("===========================================================");
+                Console.WriteLine("Please press any key to continue.");
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "5")
             {
                 Console.Clear();
                 PrintKnownNeighborhoodsNoDups(raw);
+                Console.WriteLine("===========================================================");
+                Console.WriteLine("Please press any key to continue.");
+                Console.ReadKey();
                 return true;
             }
             else if (choice == "6")
@@ -97,17 +109,38 @@ namespace LINQInManhattan
                 return raw;
             }
         }
-        
+
         #region Query methods to execute for options 1 through 5 of NavMenu method
         /// <summary>
         /// Grabs the deserialized data from the Json file and prints out all the properties
         /// </summary>
         /// <param name="raw">Deserialized data from the Json file</param>
-        static void PrintAllRaw(FeatureCollection raw)
+        static object PrintAllRaw(FeatureCollection raw)
         {
             var data = from feature in raw.Features
-                       select feature;
+                       select feature.Properties.Neighborhood;
                        
+
+            foreach (var property in data)
+            {
+                Console.WriteLine(property);
+            }
+
+            return data;
+
+        }
+
+
+        /// <summary>
+        /// Prints a list of all the Neighborhoods with out blanks
+        /// </summary>
+        /// <param name="raw">Deserialized data from the Json file</param>
+        static void PrintKnownNeighborhoods(FeatureCollection raw)
+        {
+            var data = from feature in raw.Features
+                       where (feature.Properties.Neighborhood != "")
+                       select feature.Properties.Neighborhood;
+
 
             foreach (var property in data)
             {
@@ -115,33 +148,57 @@ namespace LINQInManhattan
             }
         }
 
-        static void PrintKnownNeighborhoods(FeatureCollection raw)
-        {
-
-        }
-
+        /// <summary>
+        /// Alternate version of the PrintKnownNeighborhoods method
+        /// </summary>
+        /// <param name="raw">Deserialized data from the Json file</param>
         static void PrintKnownNeighborhoodsAlt(FeatureCollection raw)
         {
+            var data = raw.Features.Where(neighbors => neighbors.Properties.Neighborhood != "");
 
+            foreach (var property in data)
+            {
+                Console.WriteLine(property.Properties.Neighborhood);
+            }
         }
 
+        /// <summary>
+        /// Prints a list of all the Neighborhoods with out duplication
+        /// </summary>
+        /// <param name="raw">Deserialized data from the Json file</param>
         static void PrintAllNoDups(FeatureCollection raw)
         {
+            var data = from feature in raw.Features
+                       group feature by feature.Properties.Neighborhood
+                       into neighborhoods
+                       select neighborhoods;
 
+
+            foreach (var property in data)
+            {
+                Console.WriteLine(property.Key);
+            }
         }
 
+        /// <summary>
+        /// Prints a list of all the Neighborhoods with out duplication or blanks
+        /// </summary>
+        /// <param name="raw">Deserialized data from the Json file</param>
         static void PrintKnownNeighborhoodsNoDups(FeatureCollection raw)
         {
+            var data = from feature in raw.Features
+                       where (feature.Properties.Neighborhood != "")
+                       group feature by feature.Properties.Neighborhood
+                       into neighborhoods
+                       select neighborhoods;
 
+
+
+            foreach (var property in data)
+            {
+                Console.WriteLine(property.Key);
+            }
         }
         #endregion
-        //TODO: Bring the Json data into the program
-        //TODO: Convert the data into a LINQ
-        //TODO: Output all of the neighborhoods in the data list
-        //TODO: Filter out all the neighborhoods that do not have any names
-        //TODO: Remove the Duplicates
-        //TODO: Rewrite the queries from above, and consolidate all into one single query
-        //TODO: Rewrite at least one of these questions only using the opposing method (example: Use LINQ Query statements instead of LINQ method calls and vise versa.)
-
     }
 }
