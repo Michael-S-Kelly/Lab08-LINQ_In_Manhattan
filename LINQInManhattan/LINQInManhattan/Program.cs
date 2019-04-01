@@ -106,7 +106,8 @@ namespace LINQInManhattan
         static void PrintAllRaw(FeatureCollection raw)
         {
             var data = from feature in raw.Features
-                       select raw.Features;
+                       select feature;
+                       
 
             foreach (var property in data)
             {
@@ -142,23 +143,5 @@ namespace LINQInManhattan
         //TODO: Rewrite the queries from above, and consolidate all into one single query
         //TODO: Rewrite at least one of these questions only using the opposing method (example: Use LINQ Query statements instead of LINQ method calls and vise versa.)
 
-        /*
-        var data = File.ReadAllText(path);
-        var raw = JsonConvert.DeserializeObject<List<FeatureCollection>>(data);
-        */
-
-        /*
-        var data = "";
-        using (StreamReader sr = File.OpenText(path))
-        {
-            data = sr.ReadToEnd();
-        }
-
-        RootObject root = JsonConvert.DeserializeObject<RootObject>(data);
-        */
-
-        /*
-        var raw = GetJson(path);
-        */
     }
 }
