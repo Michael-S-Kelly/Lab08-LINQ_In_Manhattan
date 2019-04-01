@@ -11,11 +11,11 @@ namespace LINQInManhattan.Classes
     /// </summary>
     public class PropertyType
     {
-        [JsonProperty(PropertyName = "Type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
-        [JsonProperty(PropertyName = "Geometry")]
+        [JsonProperty(PropertyName = "geometry")]
         public Geometry Geometry { get; set; }
-        [JsonProperty(PropertyName = "Properties")]
+        [JsonProperty(PropertyName = "properties")]
         public Properties Properties { get; set; }
     }
 }

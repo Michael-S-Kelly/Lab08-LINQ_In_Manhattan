@@ -11,19 +11,19 @@ namespace LINQInManhattan.Classes
     /// </summary>
     public class Properties
     {
-        [JsonProperty(PropertyName = "Zip")]
+        [JsonProperty(PropertyName = "zip")]
         public string Zip { get; set; }
-        [JsonProperty(PropertyName = "City")]
+        [JsonProperty(PropertyName = "city")]
         public string City { get; set; }
-        [JsonProperty(PropertyName = "State")]
+        [JsonProperty(PropertyName = "state")]
         public string State { get; set; }
-        [JsonProperty(PropertyName = "Address")]
+        [JsonProperty(PropertyName = "address")]
         public string Address { get; set; }
-        [JsonProperty(PropertyName = "Borough")]
+        [JsonProperty(PropertyName = "borough")]
         public string Borough { get; set; }
-        [JsonProperty(PropertyName = "Neighborhood")]
+        [JsonProperty(PropertyName = "neighborhood")]
         public string Neighborhood { get; set; }
-        [JsonProperty(PropertyName = "County")]
+        [JsonProperty(PropertyName = "county")]
         public string County { get; set; }
     }
 }
